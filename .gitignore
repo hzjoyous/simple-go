@@ -1,7 +1,5 @@
-<<<<<<< HEAD
 .vscode/
 .idea/
-=======
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -17,4 +15,3 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
->>>>>>> ce21161fef7f06750e1fbd610134aeb1e6632e6a
