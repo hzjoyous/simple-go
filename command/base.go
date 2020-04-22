@@ -20,7 +20,7 @@ func Run(args []string) {
 	} else {
 		action = "help"
 	}
-	fmt.Println(action)
+	fmt.Println(action,":")
 	if action == "help" {
 		var keys []string
 		for k := range commandList {

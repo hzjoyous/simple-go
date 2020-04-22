@@ -1,5 +1,11 @@
 package command
 
+import (
+	"fmt"
+	"os"
+	"runtime"
+)
+
 func init() {
 	var command ConsoleInterface
 	command = new(demoOs)
@@ -19,5 +25,9 @@ func (demoOs demoOs) GetDescription()string{
 }
 
 func (demoOs demoOs) Handle(){
+	hostname ,_ := os.Hostname()
+	fmt.Println(hostname)
+	fmt.Println(runtime.GOOS)
+	fmt.Println(runtime.GOARCH)
 }
 
