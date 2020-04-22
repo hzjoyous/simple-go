@@ -89,7 +89,6 @@ func demoCQHttpHandle(c *gin.Context) {
 				fmt.Println("Response Info:")
 				fmt.Println("Error      :", err)
 				fmt.Println("Body       :", resp.String())
-				//resp, err = cqHttpClient.sendPrivateMsg(2776404988, "heiheihei[CQ:face,id=182]")
 			}
 			fmt.Println("处理类型群消息,来自", reqInfo.GroupId, "内容", reqInfo.Message, reqInfo.RawMessage)
 			break
