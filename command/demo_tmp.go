@@ -2,6 +2,8 @@ package command
 
 import (
 	"fmt"
+	"net/http"
+	"strings"
 	"time"
 )
 
@@ -16,40 +18,16 @@ func init() {
 }
 
 func (demoTmp demoTmp) GetSignature() string {
-	return "demoTmp"
+		return "demoTmp"
 }
 
 func (demoTmp demoTmp) GetDescription() string {
 	return "this is a Description"
 }
 
+
 func (demoTmp demoTmp) Handle() {
-
-	var (
-		strValue   string
-		intValue   int
-		boolValue  bool
-		floatValue float64
-	)
-	fmt.Println(strValue, intValue, boolValue, floatValue)
-
-	funcObj := func(n int) {
-		for {
-			fmt.Print("func", n)
-			time.Sleep(1*time.Second)
-		}
-	}
-	go funcObj(1)
-	go funcObj(2)
-	go funcObj(3)
-	time.Sleep(3 * time.Second)
-	funcObj2 := demoTmpGetFunc()
-	funcObj2(1)
-	//fmt.Println()
-}
-
-func demoTmpGetFunc() func(n int){
-	return func(n int){
-		fmt.Println(n)
-	}
+	fmt.Println(time.Now().UTC().Format(http.TimeFormat))
+	fmt.Println(time.Now().Hour()<5)
+	fmt.Println(strings.Contains("嗯,接着说", "接着说"))
 }

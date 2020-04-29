@@ -2,7 +2,9 @@ package command
 
 import (
 	"fmt"
+	"net/http"
 	"sort"
+	"strings"
 	"time"
 )
 
@@ -20,7 +22,7 @@ func Run(args []string) {
 	} else {
 		action = "help"
 	}
-	fmt.Println(action,":")
+	fmt.Println(action, ":")
 	if action == "help" {
 		var keys []string
 		for k := range commandList {
@@ -63,4 +65,26 @@ func Run(args []string) {
 		}
 	}
 
+}
+
+func inArrayInt64(need int64, haystack []int64) bool {
+	for _, v := range haystack {
+		if need == v {
+			return true
+		}
+	}
+	return false
+}
+
+func inArrayString(need string, haystack []string) bool {
+	for _, v := range haystack {
+		if strings.Contains(need, v) {
+			return true
+		}
+	}
+	return false
+}
+
+func date() string{
+	return time.Now().UTC().Format(http.TimeFormat)
 }
