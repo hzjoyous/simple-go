@@ -23,10 +23,10 @@ func (console simple) GetDescription() string {
 	return "this is description"
 }
 func (console simple) Handle() {
-	n := 700000000
+	n := 1000000000
 	startTime := GetMicroTime()
-	//splicingStrV1(n)
-	splicingStrV2(n / 10000)
+	splicingStrV1(n)
+	//splicingStrV2(n )
 	//time.Sleep(time.Duration(4)*time.Second)
 	endTime := GetMicroTime()
 	fmt.Println((endTime - startTime) / 1000)
