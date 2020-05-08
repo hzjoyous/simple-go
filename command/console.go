@@ -1,9 +1,9 @@
 package command
 
-
+// ConsoleInterface 接口
 type ConsoleInterface interface {
-	GetSignature()string
-	GetDescription()string
+	GetSignature() string
+	GetDescription() string
 	Handle()
 }
 
@@ -17,15 +17,14 @@ type console struct {
 	ConsoleInterface
 }
 
-func (console console) GetSignature()string{
+func (console console) GetSignature() string {
 	return "console"
 }
 
-func (console console) GetDescription()string{
+func (console console) GetDescription() string {
 	return "this is description"
 }
 
-func (console console) Handle(){
+func (console console) Handle() {
 
 }
-

@@ -20,6 +20,6 @@ func (demoStr demoStr) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoStr demoStr) Handle(){
+func (demoStr demoStr) Handle() {
 	fmt.Println("this is a demoStr")
 }

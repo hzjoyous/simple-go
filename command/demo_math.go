@@ -32,7 +32,7 @@ func (demoMath demoMath) Handle() {
 	//fmt.Println(demoMathOneFibonacci(59424))
 	fmt.Println(demoMathOneFibonacci(5942))
 	show := false
-	
+
 	if show {
 		var keys []int
 		for k := range fibonacciList {
@@ -50,7 +50,7 @@ func (demoMath demoMath) Handle() {
 
 	endTime := GetMicroTime()
 	fmt.Println(float64(endTime-startTime) / 1000.0)
-	fmt.Println("计数器统计方法执行次数",demoMathCounter)
+	fmt.Println("计数器统计方法执行次数", demoMathCounter)
 }
 
 var fibonacciList = make(map[int]*big.Int)
@@ -59,21 +59,21 @@ var (
 	demoMathCounter int
 )
 
-func demoMathOneFibonacci(n int)(res*big.Int){
+func demoMathOneFibonacci(n int) (res *big.Int) {
 	a := big.NewInt(1)
 	b := big.NewInt(1)
 	c := big.NewInt(0)
-	for i :=1 ;i<=n ;i++{
-		c = demoMathAdd(a,b)
-		a=b
-		b=c
+	for i := 1; i <= n; i++ {
+		c = demoMathAdd(a, b)
+		a = b
+		b = c
 	}
 	res = c
 	return
 }
 
 func demoMathFibonacci(n int) (res *big.Int) {
-	demoMathCounter+=1
+	demoMathCounter++
 	res, ok := fibonacciList[n]
 	if ok {
 		return

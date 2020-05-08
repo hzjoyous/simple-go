@@ -27,7 +27,7 @@ func (demoWebSocket demoWebSocket) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoWebSocket demoWebSocket) Handle(){
+func (demoWebSocket demoWebSocket) Handle() {
 	router := mux.NewRouter()
 	go h.run()
 	router.HandleFunc("/ws", myws)
@@ -35,8 +35,6 @@ func (demoWebSocket demoWebSocket) Handle(){
 		fmt.Println("err:", err)
 	}
 }
-
-//
 
 var h = hub{
 	c: make(map[*connection]bool),
@@ -57,11 +55,11 @@ func (h *hub) run() {
 		select {
 		case c := <-h.r:
 			h.c[c] = true
-			c.data.Ip = c.ws.RemoteAddr().String()
+			c.data.IP = c.ws.RemoteAddr().String()
 			c.data.Type = "handshake"
-			c.data.UserList = user_list
-			data_b, _ := json.Marshal(c.data)
-			c.sc <- data_b
+			c.data.UserList = userList
+			dataB, _ := json.Marshal(c.data)
+			c.sc <- dataB
 		case c := <-h.u:
 			if _, ok := h.c[c]; ok {
 				delete(h.c, c)
@@ -82,13 +80,13 @@ func (h *hub) run() {
 
 // data
 
-type Data struct {
-	Ip       string   `json:"ip"`
+type demoWebSocketData struct {
+	IP       string   `json:"ip"`
 	User     string   `json:"user"`
 	From     string   `json:"from"`
 	Type     string   `json:"type"`
 	Content  string   `json:"content"`
-	UserList []string `json:"user_list"`
+	UserList []string `json:"userList"`
 }
 
 // connection
@@ -96,7 +94,7 @@ type Data struct {
 type connection struct {
 	ws   *websocket.Conn
 	sc   chan []byte
-	data *Data
+	data *demoWebSocketData
 }
 
 var wu = &websocket.Upgrader{ReadBufferSize: 512,
@@ -107,17 +105,17 @@ func myws(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	c := &connection{sc: make(chan []byte, 256), ws: ws, data: &Data{}}
+	c := &connection{sc: make(chan []byte, 256), ws: ws, data: &demoWebSocketData{}}
 	h.r <- c
 	go c.writer()
 	c.reader()
 	defer func() {
 		c.data.Type = "logout"
-		user_list = del(user_list, c.data.User)
-		c.data.UserList = user_list
+		userList = del(userList, c.data.User)
+		c.data.UserList = userList
 		c.data.Content = c.data.User
-		data_b, _ := json.Marshal(c.data)
-		h.b <- data_b
+		dataB, _ := json.Marshal(c.data)
+		h.b <- dataB
 		h.r <- c
 	}()
 }
@@ -129,7 +127,7 @@ func (c *connection) writer() {
 	c.ws.Close()
 }
 
-var user_list = []string{}
+var userList = []string{}
 
 func (c *connection) reader() {
 	for {
@@ -143,19 +141,19 @@ func (c *connection) reader() {
 		case "login":
 			c.data.User = c.data.Content
 			c.data.From = c.data.User
-			user_list = append(user_list, c.data.User)
-			c.data.UserList = user_list
-			data_b, _ := json.Marshal(c.data)
-			h.b <- data_b
+			userList = append(userList, c.data.User)
+			c.data.UserList = userList
+			dataB, _ := json.Marshal(c.data)
+			h.b <- dataB
 		case "user":
 			c.data.Type = "user"
-			data_b, _ := json.Marshal(c.data)
-			h.b <- data_b
+			dataB, _ := json.Marshal(c.data)
+			h.b <- dataB
 		case "logout":
 			c.data.Type = "logout"
-			user_list = del(user_list, c.data.User)
-			data_b, _ := json.Marshal(c.data)
-			h.b <- data_b
+			userList = del(userList, c.data.User)
+			dataB, _ := json.Marshal(c.data)
+			h.b <- dataB
 			h.r <- c
 		default:
 			fmt.Print("========default================")
@@ -171,15 +169,15 @@ func del(slice []string, user string) []string {
 	if count == 1 && slice[0] == user {
 		return []string{}
 	}
-	var n_slice = []string{}
+	var nSlice = []string{}
 	for i := range slice {
 		if slice[i] == user && i == count {
 			return slice[:count]
 		} else if slice[i] == user {
-			n_slice = append(slice[:i], slice[i+1:]...)
+			nSlice = append(slice[:i], slice[i+1:]...)
 			break
 		}
 	}
-	fmt.Println(n_slice)
-	return n_slice
+	fmt.Println(nSlice)
+	return nSlice
 }

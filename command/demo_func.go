@@ -23,15 +23,15 @@ func (console demoFunc) GetDescription() string {
 func (console demoFunc) Handle() {
 
 	fmt.Println("多值返回")
-	a,b := func1()
-	fmt.Println(a,b)
+	a, b := func1()
+	fmt.Println(a, b)
 
 	startTime := GetMicroTime()
-	demoFuncCounter=1
+	demoFuncCounter = 1
 	fmt.Println(fibonacci(46))
 	endTime := GetMicroTime()
-	fmt.Println(float64(endTime - startTime) / 1000.0)
-	fmt.Println("计数器统计方法执行次数",demoFuncCounter)
+	fmt.Println(float64(endTime-startTime) / 1000.0)
+	fmt.Println("计数器统计方法执行次数", demoFuncCounter)
 	// 求第46位斐波那契数列将调用方法5942430146次
 }
 
@@ -39,9 +39,8 @@ var (
 	demoFuncCounter int
 )
 
-
 func fibonacci(n int) (res int) {
-	demoFuncCounter+=1
+	demoFuncCounter++
 	if n <= 1 {
 		res = 1
 	} else {
@@ -50,8 +49,7 @@ func fibonacci(n int) (res int) {
 	return
 }
 
-
-func func1()(a string,b int){
+func func1() (a string, b int) {
 	a = "str"
 	b = 1
 	return

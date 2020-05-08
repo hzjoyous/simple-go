@@ -5,14 +5,14 @@ import (
 	"time"
 )
 
-func randTrue(Molecular int,Denominator int) bool{
-	return rand.Intn(Denominator) <Molecular
+func randTrue(Molecular int, Denominator int) bool {
+	return rand.Intn(Denominator) < Molecular
 }
 
-func atCQCode(userId string) string{
-	return "[CQ:at,qq=" + userId + "]"
+func atCQCode(userID string) string {
+	return "[CQ:at,qq=" + userID + "]"
 }
 
-func init(){
+func init() {
 	rand.Seed(time.Now().UnixNano())
 }

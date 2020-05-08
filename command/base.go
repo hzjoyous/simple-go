@@ -10,10 +10,12 @@ import (
 
 var commandList = make(map[string]ConsoleInterface)
 
+// GetMicroTime 获取当前时间戳
 func GetMicroTime() int64 {
 	return time.Now().UnixNano() / 1000000
 }
 
+// Run 运行
 func Run(args []string) {
 	fmt.Println("run")
 	var action string
@@ -85,6 +87,6 @@ func inArrayString(need string, haystack []string) bool {
 	return false
 }
 
-func date() string{
+func date() string {
 	return time.Now().UTC().Format(http.TimeFormat)
 }

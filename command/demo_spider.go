@@ -24,19 +24,19 @@ func (demoSpider demoSpider) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoSpider demoSpider) Handle(){
+func (demoSpider demoSpider) Handle() {
 	resp, err := http.Get("https://tieba.baidu.com/p/6051076813?red_tag=1573533731")
-	HandleError(err, "http.Get url")
+	handleError(err, "http.Get url")
 	defer resp.Body.Close()
 	// 2.读取页面内容
 	pageBytes, err := ioutil.ReadAll(resp.Body)
-	HandleError(err, "ioutil.ReadAll")
+	handleError(err, "ioutil.ReadAll")
 	// 字节转字符串
 	pageStr := string(pageBytes)
 	fmt.Println(pageStr)
 }
 
-func HandleError(err error, why string) {
+func handleError(err error, why string) {
 	if err != nil {
 		fmt.Println(why, err)
 	}
