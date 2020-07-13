@@ -28,12 +28,17 @@ func (demoWebSocket demoWebSocket) GetDescription() string {
 }
 
 func (demoWebSocket demoWebSocket) Handle() {
+	fs := http.FileServer(http.Dir("./web"))
+
 	router := mux.NewRouter()
 	go h.run()
 	router.HandleFunc("/ws", myws)
+	router.Handle("/", fs)
 	if err := http.ListenAndServe("127.0.0.1:8080", router); err != nil {
 		fmt.Println("err:", err)
 	}
+	// Configure websocket route
+
 }
 
 var h = hub{
@@ -98,7 +103,9 @@ type connection struct {
 }
 
 var wu = &websocket.Upgrader{ReadBufferSize: 512,
-	WriteBufferSize: 512, CheckOrigin: func(r *http.Request) bool { return true }}
+	WriteBufferSize: 512,
+	CheckOrigin:     func(r *http.Request) bool { return true },
+}
 
 func myws(w http.ResponseWriter, r *http.Request) {
 	ws, err := wu.Upgrade(w, r, nil)
