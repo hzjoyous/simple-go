@@ -1,7 +1,9 @@
 package command
 
 import (
+	"flag"
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -13,9 +15,23 @@ func init() {
 	var command ConsoleInterface
 	command = new(demoChan)
 	commandList[command.GetSignature()] = command
+
 }
 
 func (demoChan demoChan) GetSignature() string {
+	thisCommand := flag.NewFlagSet("demoChan", flag.ExitOnError)
+	fooEnable := thisCommand.Bool("enable", false, "enable")
+	fooName := thisCommand.String("name", "", "name")
+
+	if len(os.Args) > 2 {
+
+		thisCommand.Parse(os.Args[2:])
+		fmt.Println("subcommand 'demoCommand'")
+		fmt.Println("  enable:", *fooEnable)
+		fmt.Println("  name:", *fooName)
+		fmt.Println("  tail:", thisCommand.Args())
+	}
+
 	return "demoChan"
 }
 

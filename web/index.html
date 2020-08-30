@@ -51,8 +51,9 @@
                 return;
             case 'login':
             case 'logout':
+            console.log(msg);
                 user_name = msg.content;
-                name_list = msg.user_list;
+                name_list = msg.userList;
                 change_type = msg.type;
                 dealUser(user_name, change_type, name_list);
                 return;

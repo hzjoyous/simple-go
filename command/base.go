@@ -60,6 +60,7 @@ func Run(args []string) {
 	} else {
 
 		console, ok := commandList[action]
+
 		if ok {
 			console.Handle()
 		} else {
