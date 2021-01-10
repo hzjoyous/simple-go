@@ -7,26 +7,26 @@ import (
 	"github.com/kataras/iris/v12/middleware/recover"
 )
 
-type demoIris struct {
+type cmdIris struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoIris)
+	command = new(cmdIris)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoIris demoIris) GetSignature() string {
-	return "demoIris"
+func (cmdIris cmdIris) GetSignature() string {
+	return "cmdIris"
 }
 
-func (demoIris demoIris) GetDescription() string {
+func (cmdIris cmdIris) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoIris demoIris) Handle() {
-	fmt.Println("this is a demoIris")
+func (cmdIris cmdIris) Handle() {
+	fmt.Println("this is a cmdIris")
 	app := iris.New()
 	//app.Logger().SetLevel("debug")
 	app.Logger().SetLevel("prod")

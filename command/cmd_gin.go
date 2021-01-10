@@ -7,25 +7,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type demoGin struct {
+type cmdGin struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoGin)
+	command = new(cmdGin)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoGin demoGin) GetSignature() string {
-	return "demoGin"
+func (cmdGin cmdGin) GetSignature() string {
+	return "cmdGin"
 }
 
-func (demoGin demoGin) GetDescription() string {
+func (cmdGin cmdGin) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoGin demoGin) Handle() {
+func (cmdGin cmdGin) Handle() {
 	r := setupRouter()
 	_ = r.Run(":8080")
 	fmt.Println(" Listen and Server in 0.0.0.0:8080")

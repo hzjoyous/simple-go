@@ -2,25 +2,25 @@ package command
 
 import "fmt"
 
-type demoArrAndMap struct {
+type cmdArrAndMap struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoArrAndMap)
+	command = new(cmdArrAndMap)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoArrAndMap demoArrAndMap) GetSignature() string {
-	return "demoArrAndMap"
+func (cmdArrAndMap cmdArrAndMap) GetSignature() string {
+	return "cmdArrAndMap"
 }
 
-func (demoArrAndMap demoArrAndMap) GetDescription() string {
+func (cmdArrAndMap cmdArrAndMap) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoArrAndMap demoArrAndMap) Handle() {
+func (cmdArrAndMap cmdArrAndMap) Handle() {
 	var (
 		intArr  [2]int
 		intArr2 [2][2]int
@@ -60,14 +60,14 @@ func (demoArrAndMap demoArrAndMap) Handle() {
 	fmt.Println("综上表现，goMap的初始化的设计就是脱裤子放屁")
 
 
-	demoArrAndMapPrintSlice(intArr3)
+	cmdArrAndMapPrintSlice(intArr3)
 	fmt.Println(len(intArr3),cap(intArr3))
 	intArr3 = append(intArr3, 1,2,3,4,5,6,7)
 	fmt.Println(len(intArr3),cap(intArr3))
-	demoArrAndMapPrintSlice(intArr3)
+	cmdArrAndMapPrintSlice(intArr3)
 	intArr3[0] = 9
-	demoArrAndMapPrintSlice(intArr3)
+	cmdArrAndMapPrintSlice(intArr3)
 }
-func demoArrAndMapPrintSlice(x []int){
+func cmdArrAndMapPrintSlice(x []int){
 	fmt.Printf("len=%d cap=%d slice=%v\n",len(x),cap(x),x)
 }

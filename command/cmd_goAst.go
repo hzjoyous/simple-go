@@ -7,26 +7,26 @@ import (
 	"go/token"
 )
 
-type demoGoAst struct {
+type cmdGoAst struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoGoAst)
+	command = new(cmdGoAst)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoGoAst demoGoAst) GetSignature() string {
-	return "demoGoAst"
+func (cmdGoAst cmdGoAst) GetSignature() string {
+	return "cmdGoAst"
 }
 
-func (demoGoAst demoGoAst) GetDescription() string {
+func (cmdGoAst cmdGoAst) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoGoAst demoGoAst) Handle() {
-	fmt.Println("this is a demoGoAst")
+func (cmdGoAst cmdGoAst) Handle() {
+	fmt.Println("this is a cmdGoAst")
 	src := `
 package main
 func main() {

@@ -8,23 +8,23 @@ import (
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoOs)
+	command = new(cmdOs)
 	commandList[command.GetSignature()] = command
 }
 
-type demoOs struct {
+type cmdOs struct {
 	ConsoleInterface
 }
 
-func (demoOs demoOs) GetSignature()string{
-	return "demoOs"
+func (cmdOs cmdOs) GetSignature()string{
+	return "cmdOs"
 }
 
-func (demoOs demoOs) GetDescription()string{
-	return "this is demoOs"
+func (cmdOs cmdOs) GetDescription()string{
+	return "this is cmdOs"
 }
 
-func (demoOs demoOs) Handle(){
+func (cmdOs cmdOs) Handle(){
 	hostname ,_ := os.Hostname()
 	fmt.Println(hostname)
 	fmt.Println(runtime.GOOS)

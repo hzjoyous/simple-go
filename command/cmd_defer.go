@@ -4,23 +4,23 @@ import "fmt"
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoDefer)
+	command = new(cmdDefer)
 	commandList[command.GetSignature()] = command
 }
 
-type demoDefer struct {
+type cmdDefer struct {
 	ConsoleInterface
 }
 
-func (demoDefer demoDefer) GetSignature()string{
-	return "demoDefer"
+func (cmdDefer cmdDefer) GetSignature()string{
+	return "cmdDefer"
 }
 
-func (demoDefer demoDefer) GetDescription()string{
+func (cmdDefer cmdDefer) GetDescription()string{
 	return "this is description"
 }
 
-func (demoDefer demoDefer) Handle(){
+func (cmdDefer cmdDefer) Handle(){
 	defer func() {fmt.Println("a")}()
 	defer func() {fmt.Println("b")}()
 	defer func() {fmt.Println("c")}()

@@ -15,28 +15,28 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-type demoCQ struct {
+type cmdCQ struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoCQ)
+	command = new(cmdCQ)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoCQ demoCQ) GetSignature() string {
-	return "demoCQ"
+func (cmdCQ cmdCQ) GetSignature() string {
+	return "cmdCQ"
 }
 
-func (demoCQ demoCQ) GetDescription() string {
+func (cmdCQ cmdCQ) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoCQ demoCQ) Handle() {
+func (cmdCQ cmdCQ) Handle() {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
-	r.POST("/api/demo", demoCQHttpHandle)
+	r.POST("/api/cmd", cmdCQHttpHandle)
 	//work()
 	go work()
 	_ = r.Run(":8000")
@@ -67,7 +67,7 @@ func work() {
 	// fmt.Println(value.String())
 }
 
-func demoCQHttpHandle(c *gin.Context) {
+func cmdCQHttpHandle(c *gin.Context) {
 	reqInfo := message{}
 	//Headers were already written. Wanted to override status code 400 with 200
 	//err := c.BindJSON(&reqInfo)

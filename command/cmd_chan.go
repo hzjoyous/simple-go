@@ -7,39 +7,39 @@ import (
 	"time"
 )
 
-type demoChan struct {
+type cmdChan struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoChan)
+	command = new(cmdChan)
 	commandList[command.GetSignature()] = command
 
 }
 
-func (demoChan demoChan) GetSignature() string {
-	thisCommand := flag.NewFlagSet("demoChan", flag.ExitOnError)
+func (cmdChan cmdChan) GetSignature() string {
+	thisCommand := flag.NewFlagSet("cmdChan", flag.ExitOnError)
 	fooEnable := thisCommand.Bool("enable", false, "enable")
 	fooName := thisCommand.String("name", "", "name")
 
 	if len(os.Args) > 2 {
 
 		thisCommand.Parse(os.Args[2:])
-		fmt.Println("subcommand 'demoCommand'")
+		fmt.Println("subcommand 'cmdCommand'")
 		fmt.Println("  enable:", *fooEnable)
 		fmt.Println("  name:", *fooName)
 		fmt.Println("  tail:", thisCommand.Args())
 	}
 
-	return "demoChan"
+	return "cmdChan"
 }
 
-func (demoChan demoChan) GetDescription() string {
+func (cmdChan cmdChan) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoChan demoChan) Handle() {
+func (cmdChan cmdChan) Handle() {
 
 	chanVar := make(chan int)
 	go func() {

@@ -5,25 +5,25 @@ import (
 	"fmt"
 )
 
-type demoFlag struct {
+type cmdFlag struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoFlag)
+	command = new(cmdFlag)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoFlag demoFlag) GetSignature() string {
-	return "demoFlag"
+func (cmdFlag cmdFlag) GetSignature() string {
+	return "cmdFlag"
 }
 
-func (demoFlag demoFlag) GetDescription() string {
+func (cmdFlag cmdFlag) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoFlag demoFlag) Handle() {
+func (cmdFlag cmdFlag) Handle() {
 
 	var (
 		h    bool

@@ -6,25 +6,25 @@ import (
 	"net/http"
 )
 
-type demoSpider struct {
+type cmdSpider struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoSpider)
+	command = new(cmdSpider)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoSpider demoSpider) GetSignature() string {
-	return "demoSpider"
+func (cmdSpider cmdSpider) GetSignature() string {
+	return "cmdSpider"
 }
 
-func (demoSpider demoSpider) GetDescription() string {
+func (cmdSpider cmdSpider) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoSpider demoSpider) Handle() {
+func (cmdSpider cmdSpider) Handle() {
 	resp, err := http.Get("https://tieba.baidu.com/p/6051076813?red_tag=1573533731")
 	handleError(err, "http.Get url")
 	defer resp.Body.Close()

@@ -16,7 +16,7 @@ type simple struct {
 }
 
 func (console simple) GetSignature() string {
-	return "demoSimple"
+	return "cmdSimple"
 }
 
 func (console simple) GetDescription() string {

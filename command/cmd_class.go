@@ -2,31 +2,31 @@ package command
 
 import "fmt"
 
-type demoClass struct {
+type cmdClass struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoClass)
+	command = new(cmdClass)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoClass demoClass) GetSignature() string {
-	return "demoClass"
+func (cmdClass cmdClass) GetSignature() string {
+	return "cmdClass"
 }
 
-func (demoClass demoClass) GetDescription() string {
+func (cmdClass cmdClass) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoClass demoClass) Handle() {
+func (cmdClass cmdClass) Handle() {
 
 	console := baseConsole{Signature: "signature", Description: "description"}
 	consoleList[console.GetSignature()] = console
-	consoleDemo := demoConsole{baseConsole{Signature: "asd", Description: "sada"}}
-	consoleList[consoleDemo.GetSignature()] = consoleDemo
-	fmt.Println(consoleDemo.GetSignature())
+	consolecmd := cmdConsole{baseConsole{Signature: "asd", Description: "sada"}}
+	consoleList[consolecmd.GetSignature()] = consolecmd
+	fmt.Println(consolecmd.GetSignature())
 }
 
 var consoleList = make(map[string]baseConsoleInterface)
@@ -53,6 +53,6 @@ func (obj baseConsole) Handler() {
 
 }
 
-type demoConsole struct {
+type cmdConsole struct {
 	baseConsole
 }

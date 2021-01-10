@@ -4,43 +4,43 @@ import "fmt"
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoFunc)
+	command = new(cmdFunc)
 	commandList[command.GetSignature()] = command
 }
 
-type demoFunc struct {
+type cmdFunc struct {
 	ConsoleInterface
 }
 
-func (console demoFunc) GetSignature() string {
-	return "demoFunc"
+func (console cmdFunc) GetSignature() string {
+	return "cmdFunc"
 }
 
-func (console demoFunc) GetDescription() string {
+func (console cmdFunc) GetDescription() string {
 	return "this is description"
 }
 
-func (console demoFunc) Handle() {
+func (console cmdFunc) Handle() {
 
 	fmt.Println("多值返回")
 	a, b := func1()
 	fmt.Println(a, b)
 
 	startTime := GetMicroTime()
-	demoFuncCounter = 1
+	cmdFuncCounter = 1
 	fmt.Println(fibonacci(46))
 	endTime := GetMicroTime()
 	fmt.Println(float64(endTime-startTime) / 1000.0)
-	fmt.Println("计数器统计方法执行次数", demoFuncCounter)
+	fmt.Println("计数器统计方法执行次数", cmdFuncCounter)
 	// 求第46位斐波那契数列将调用方法5942430146次
 }
 
 var (
-	demoFuncCounter int
+	cmdFuncCounter int
 )
 
 func fibonacci(n int) (res int) {
-	demoFuncCounter++
+	cmdFuncCounter++
 	if n <= 1 {
 		res = 1
 	} else {

@@ -9,25 +9,25 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-type demoWebSocket struct {
+type cmdWebSocket struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoWebSocket)
+	command = new(cmdWebSocket)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoWebSocket demoWebSocket) GetSignature() string {
-	return "demoWebSocket"
+func (cmdWebSocket cmdWebSocket) GetSignature() string {
+	return "cmdWebSocket"
 }
 
-func (demoWebSocket demoWebSocket) GetDescription() string {
+func (cmdWebSocket cmdWebSocket) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoWebSocket demoWebSocket) Handle() {
+func (cmdWebSocket cmdWebSocket) Handle() {
 	fs := http.FileServer(http.Dir("./web"))
 
 	router := mux.NewRouter()
@@ -85,7 +85,7 @@ func (h *hub) run() {
 
 // data
 
-type demoWebSocketData struct {
+type cmdWebSocketData struct {
 	IP       string   `json:"ip"`
 	User     string   `json:"user"`
 	From     string   `json:"from"`
@@ -99,7 +99,7 @@ type demoWebSocketData struct {
 type connection struct {
 	ws   *websocket.Conn
 	sc   chan []byte
-	data *demoWebSocketData
+	data *cmdWebSocketData
 }
 
 var wu = &websocket.Upgrader{ReadBufferSize: 512,
@@ -112,7 +112,7 @@ func myws(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		return
 	}
-	c := &connection{sc: make(chan []byte, 256), ws: ws, data: &demoWebSocketData{}}
+	c := &connection{sc: make(chan []byte, 256), ws: ws, data: &cmdWebSocketData{}}
 	h.r <- c
 	go c.writer()
 	c.reader()

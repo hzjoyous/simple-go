@@ -5,27 +5,27 @@ import (
 	"time"
 )
 
-type demoC struct {
+type cmdC struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoC)
+	command = new(cmdC)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoC demoC) GetSignature() string {
-	return "demoC"
+func (cmdC cmdC) GetSignature() string {
+	return "cmdC"
 }
 
-func (demoC demoC) GetDescription() string {
+func (cmdC cmdC) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoC demoC) Handle() {
+func (cmdC cmdC) Handle() {
 
-	fmt.Println("this is a demoC")
+	fmt.Println("this is a cmdC")
 
 	plate := make(chan int)
 	apple := make(chan int)

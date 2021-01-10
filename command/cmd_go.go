@@ -6,25 +6,25 @@ import (
 	"time"
 )
 
-type demoGo struct {
+type cmdGo struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoGo)
+	command = new(cmdGo)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoGo demoGo) GetSignature() string {
-	return "demoGo"
+func (cmdGo cmdGo) GetSignature() string {
+	return "cmdGo"
 }
 
-func (demoGo demoGo) GetDescription() string {
+func (cmdGo cmdGo) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoGo demoGo) Handle() {
+func (cmdGo cmdGo) Handle() {
 	go func() {
 		fmt.Println("A:我是一个来自闭包的携程，end")
 	}()

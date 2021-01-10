@@ -2,27 +2,27 @@ package command
 
 import "fmt"
 
-type demoScanf struct {
+type cmdScanf struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoScanf)
+	command = new(cmdScanf)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoScanf demoScanf) GetSignature() string {
-	return "demoScanf"
+func (cmdScanf cmdScanf) GetSignature() string {
+	return "cmdScanf"
 }
 
-func (demoScanf demoScanf) GetDescription() string {
+func (cmdScanf cmdScanf) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoScanf demoScanf) Handle() {
+func (cmdScanf cmdScanf) Handle() {
 
-	fmt.Println("this is a demoScanf")
+	fmt.Println("this is a cmdScanf")
 	var input string
 	fmt.Scanf("%s", &input)
 	fmt.Printf("Your input string is %s", input)

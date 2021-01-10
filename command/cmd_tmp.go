@@ -7,26 +7,26 @@ import (
 	"time"
 )
 
-type demoTmp struct {
+type cmdTmp struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoTmp)
+	command = new(cmdTmp)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoTmp demoTmp) GetSignature() string {
-		return "demoTmp"
+func (cmdTmp cmdTmp) GetSignature() string {
+		return "cmdTmp"
 }
 
-func (demoTmp demoTmp) GetDescription() string {
+func (cmdTmp cmdTmp) GetDescription() string {
 	return "this is a Description"
 }
 
 
-func (demoTmp demoTmp) Handle() {
+func (cmdTmp cmdTmp) Handle() {
 	fmt.Println(time.Now().UTC().Format(http.TimeFormat))
 	fmt.Println(time.Now().Hour()<5)
 	fmt.Println(strings.Contains("嗯,接着说", "接着说"))

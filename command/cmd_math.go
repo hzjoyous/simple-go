@@ -6,31 +6,31 @@ import (
 	"sort"
 )
 
-type demoMath struct {
+type cmdMath struct {
 	ConsoleInterface
 }
 
 func init() {
 	var command ConsoleInterface
-	command = new(demoMath)
+	command = new(cmdMath)
 	commandList[command.GetSignature()] = command
 }
 
-func (demoMath demoMath) GetSignature() string {
-	return "demoMath"
+func (cmdMath cmdMath) GetSignature() string {
+	return "cmdMath"
 }
 
-func (demoMath demoMath) GetDescription() string {
+func (cmdMath cmdMath) GetDescription() string {
 	return "this is a Description"
 }
 
-func (demoMath demoMath) Handle() {
-	fmt.Println("this is a demoMath")
+func (cmdMath cmdMath) Handle() {
+	fmt.Println("this is a cmdMath")
 	startTime := GetMicroTime()
-	demoMathCounter = 0
-	//fmt.Println(demoMathFibonacci(59424))
-	//fmt.Println(demoMathOneFibonacci(59424))
-	fmt.Println(demoMathOneFibonacci(5942))
+	cmdMathCounter = 0
+	//fmt.Println(cmdMathFibonacci(59424))
+	//fmt.Println(cmdMathOneFibonacci(59424))
+	fmt.Println(cmdMathOneFibonacci(5942))
 	show := false
 
 	if show {
@@ -50,21 +50,21 @@ func (demoMath demoMath) Handle() {
 
 	endTime := GetMicroTime()
 	fmt.Println(float64(endTime-startTime) / 1000.0)
-	fmt.Println("计数器统计方法执行次数", demoMathCounter)
+	fmt.Println("计数器统计方法执行次数", cmdMathCounter)
 }
 
 var fibonacciList = make(map[int]*big.Int)
 
 var (
-	demoMathCounter int
+	cmdMathCounter int
 )
 
-func demoMathOneFibonacci(n int) (res *big.Int) {
+func cmdMathOneFibonacci(n int) (res *big.Int) {
 	a := big.NewInt(1)
 	b := big.NewInt(1)
 	c := big.NewInt(0)
 	for i := 1; i <= n; i++ {
-		c = demoMathAdd(a, b)
+		c = cmdMathAdd(a, b)
 		a = b
 		b = c
 	}
@@ -72,8 +72,8 @@ func demoMathOneFibonacci(n int) (res *big.Int) {
 	return
 }
 
-func demoMathFibonacci(n int) (res *big.Int) {
-	demoMathCounter++
+func cmdMathFibonacci(n int) (res *big.Int) {
+	cmdMathCounter++
 	res, ok := fibonacciList[n]
 	if ok {
 		return
@@ -83,18 +83,18 @@ func demoMathFibonacci(n int) (res *big.Int) {
 	} else {
 		f1, ok := fibonacciList[n-1]
 		if !ok {
-			f1 = demoMathFibonacci(n - 1)
+			f1 = cmdMathFibonacci(n - 1)
 		}
 		f2, ok := fibonacciList[n-2]
 		if !ok {
-			f2 = demoMathFibonacci(n - 2)
+			f2 = cmdMathFibonacci(n - 2)
 		}
-		res = demoMathAdd(f1, f2)
+		res = cmdMathAdd(f1, f2)
 	}
 	fibonacciList[n] = res
 	return
 }
 
-func demoMathAdd(x, y *big.Int) *big.Int {
+func cmdMathAdd(x, y *big.Int) *big.Int {
 	return big.NewInt(0).Add(x, y)
 }
