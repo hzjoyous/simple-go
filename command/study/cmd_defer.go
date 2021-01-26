@@ -3,6 +3,7 @@ package study
 import (
 	"fmt"
 	"simple-go/command/console"
+	"time"
 )
 
 func init() {
@@ -15,6 +16,10 @@ func cmdDefer(){
 	defer func() {fmt.Println("b")}()
 	defer func() {fmt.Println("c")}()
 	cmdDeferFunc1()
+
+	for {
+		time.Sleep(time.Second)
+	}
 }
 
 

@@ -7,10 +7,11 @@ import (
 )
 
 type maraiHttpClient struct {
-	httpClient    *resty.Client
-	sessionKey    string
-	adminQQNumber string
-	authKey       string
+	httpClient        *resty.Client
+	sessionKey        string
+	sessionVerifyTime int64
+	adminQQNumber     string
+	authKey           string
 }
 
 func newMaraiClient(authKey string, adminQQNumber string) maraiHttpClient {
@@ -23,7 +24,6 @@ func newMaraiClient(authKey string, adminQQNumber string) maraiHttpClient {
 }
 
 func (receiver *maraiHttpClient) checkSessionByCode(code int) error {
-
 	var err error
 	if code == 3 || code == 4 {
 		return receiver.verifySession()
@@ -68,6 +68,7 @@ type aboutResponse struct {
 }
 
 /**
+* 版本
  */
 func (receiver maraiHttpClient) getAbout() (resp *resty.Response, err error) {
 	return receiver.httpClient.R().SetQueryParams(map[string]string{
@@ -106,10 +107,11 @@ type releaseResponse struct {
 	Msg  string `json:"msg"`
 }
 
+// 释放session
 func (receiver maraiHttpClient) release() (resp *resty.Response, err error) {
 	return receiver.httpClient.R().SetQueryParams(map[string]string{
-		"sessionKey": "YourSessionKey",
-		"qq":         "123456789",
+		"sessionKey": receiver.sessionKey,
+		"qq":         receiver.adminQQNumber,
 	}).Post("/release")
 }
 
@@ -129,14 +131,20 @@ type sendFriendMessageResponse struct {
 	MessageID int    `json:"messageId"`
 }
 
-func (receiver maraiHttpClient) sendFriendMessage(qq string, message string) (resp *resty.Response, err error) {
+func getTextMessage(message string)map[string]interface{}{
+	return map[string]interface{}{"type":"Plain","text":message}
+}
+// ** 1~289
+func getFaceMessage(message string)map[string]interface{}{
+	return map[string]interface{}{"type":"Face","faceId":message}
+}
+// 发送消息给friend
+func (receiver maraiHttpClient) sendFriendMessage(qq string,messageChainList ...map[string]interface{}) (resp *resty.Response, err error) {
 	fmt.Println(receiver.sessionKey)
 	return receiver.httpClient.R().SetBody(map[string]interface{}{
 		"sessionKey": receiver.sessionKey,
 		"target":     qq,
-		"messageChain": []interface{}{
-			map[string]interface{}{"type": "Plain", "text": message},
-		},
+		"messageChain": messageChainList,
 	}).Post("/sendFriendMessage")
 }
 
@@ -146,6 +154,7 @@ func (receiver maraiHttpClient) sendTempMessage() (resp *resty.Response, err err
 
 	}).Post("")
 }
+
 
 type sendGroupMessageRequest struct {
 	SessionKey   string `json:"sessionKey"`
@@ -163,6 +172,7 @@ type sendGroupMessageResponse struct {
 	MessageID int    `json:"messageId"`
 }
 
+// 发送小小给群组
 func (receiver maraiHttpClient) sendGroupMessage(GroupId string, message string) (resp *resty.Response, err error) {
 	fmt.Println(receiver.sessionKey)
 	return receiver.httpClient.R().SetBody(sendGroupMessageRequest{
@@ -182,8 +192,9 @@ type friendListResponse []struct {
 	Remark   string `json:"remark"`
 }
 
-func (receiver maraiHttpClient) friendList(sessionKey string) (resp *resty.Response, err error) {
+// 获取好友列表
+func (receiver maraiHttpClient) friendList() (resp *resty.Response, err error) {
 	return receiver.httpClient.R().SetQueryParams(map[string]string{
-		"sessionKey": sessionKey,
+		"sessionKey": receiver.sessionKey,
 	}).Get("/friendList")
 }

@@ -1,25 +1,39 @@
 package MaraiHttpClient
 
+import "strconv"
 
-
-type qqPeople struct {
-	Name     string `json:"name"`
-	QQNumber string `json:"QQNumber"`
+type qqFriendEntity struct {
+	ID       int    `json:"id"`
+	Nickname string `json:"nickname"`
+	Remark   string `json:"remark"`
 }
 
-var qqPeopleList []qqPeople
+func (receiver qqFriendEntity) getQQNumber() string {
+	return strconv.Itoa(receiver.ID)
+}
+
+var qqFriendEntityList []qqFriendEntity
 
 func init() {
-	qqPeopleList = append(qqPeopleList, qqPeople{Name: "董珈毓", QQNumber: "3256439706"})
-	qqPeopleList = append(qqPeopleList, qqPeople{Name: "倪家楠", QQNumber: "774340277"})
-	qqPeopleList = append(qqPeopleList, qqPeople{Name: "杨晓琼", QQNumber: "626726829"})
-	qqPeopleList = append(qqPeopleList, qqPeople{Name: "涂青青", QQNumber: "3346445171"})
-	qqPeopleList = append(qqPeopleList, qqPeople{Name: "乌鱼子", QQNumber: "1492799403"})
-	qqPeopleList = append(qqPeopleList, qqPeople{Name: "张柳", QQNumber: "1320457569"})
-	//qqPeopleList = append(qqPeopleList, qqPeople{Name: "佩佩", QQNumber: "2508764466"})
-	qqPeopleList = append(qqPeopleList, qqPeople{Name: "柠夏初开", QQNumber: "2338900259"})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "董珈毓", ID: 3256439706})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "倪家楠", ID: 774340277})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "杨晓琼", ID: 626726829})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "涂青青", ID: 3346445171})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "乌鱼子", ID: 1492799403})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "张柳", ID: 1320457569})
+	//qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "佩佩", ID: 2508764466})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "柠夏初开", ID: 2338900259})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "☾  ☾  ☾", ID: 2030204736})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "", ID: 2686298697})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "", ID: 2039799133})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "", ID: 1182996608})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "", ID: 1182996608})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "", ID: 2033254708})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "", ID: 2033254708})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "", ID: 1411880115})
+	qqFriendEntityList = append(qqFriendEntityList, qqFriendEntity{Remark: "", ID: 88958033})
 }
 
-func getQQPeopleList() []qqPeople {
-	return qqPeopleList
+func getQQFriendEntityList() []qqFriendEntity {
+	return qqFriendEntityList
 }
