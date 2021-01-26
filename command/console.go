@@ -1,30 +1,15 @@
 package command
 
-// ConsoleInterface 接口
-type ConsoleInterface interface {
-	GetSignature() string
-	GetDescription() string
-	Handle()
-}
+import (
+	"fmt"
+	"simple-go/command/console"
+)
 
 func init() {
-	var command ConsoleInterface
-	command = new(console)
-	commandList[command.GetSignature()] = command
+	c := console.Console{Signature: "cmd", Description: "this is a cmd", Handle: handle}
+	commandList[c.Signature] = c
 }
 
-type console struct {
-	ConsoleInterface
-}
-
-func (console console) GetSignature() string {
-	return "console"
-}
-
-func (console console) GetDescription() string {
-	return "this is description"
-}
-
-func (console console) Handle() {
-
+func handle() {
+	fmt.Println("this is a demo")
 }

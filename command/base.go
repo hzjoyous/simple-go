@@ -3,17 +3,13 @@ package command
 import (
 	"fmt"
 	"net/http"
+	"simple-go/command/console"
 	"sort"
 	"strings"
 	"time"
 )
 
-var commandList = make(map[string]ConsoleInterface)
-
-// GetMicroTime 获取当前时间戳
-func GetMicroTime() int64 {
-	return time.Now().UnixNano() / 1000000
-}
+var commandList = make(map[string]console.Console)
 
 // Run 运行
 func Run(args []string) {
@@ -34,40 +30,31 @@ func Run(args []string) {
 		sort.Strings(keys)
 
 		for _, k := range keys {
-			fmt.Println("\t" + commandList[k].GetSignature())
+			fmt.Println("\t" + commandList[k].Signature)
 		}
 
 		if false {
-			for _, consoleValue := range commandList {
-				// 断言1
-				console, ok := consoleValue.(ConsoleInterface)
-				if ok {
-					fmt.Println("\t" + console.GetSignature())
-				} else {
-					fmt.Println("none")
-				}
+			for _, consoleEntity := range commandList {
+				fmt.Println("\t" + consoleEntity.Signature)
 
-				// 断言2
-				//switch console := consoleValue.(type) {
-				//case ConsoleInterface:
-				//	fmt.Println(console.GetDescription())
-				//default:
-				//	fmt.Println("none")
-				//}
 			}
 		}
 
 	} else {
-
-		console, ok := commandList[action]
-
+		consoleEntity, ok := commandList[action]
 		if ok {
-			console.Handle()
+			consoleEntity.Handle()
 		} else {
 			fmt.Println("command not found")
 		}
 	}
 
+}
+
+
+// GetMicroTime 获取当前时间戳
+func GetMicroTime() int64 {
+	return time.Now().UnixNano() / 1000000
 }
 
 func inArrayInt64(need int64, haystack []int64) bool {
@@ -91,3 +78,19 @@ func inArrayString(need string, haystack []string) bool {
 func date() string {
 	return time.Now().UTC().Format(http.TimeFormat)
 }
+
+//// 断言1
+//console, ok := consoleValue.(console.Console)
+//if ok {
+//	fmt.Println("\t" + console.Signature)
+//} else {
+//	fmt.Println("none")
+//}
+
+// 断言2
+//switch console := consoleValue.(type) {
+//case console:
+//	fmt.Println(console.GetDescription())
+//default:
+//	fmt.Println("none")
+//}
