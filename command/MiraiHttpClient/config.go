@@ -1,4 +1,4 @@
-package MaraiHttpClient
+package MiraiHttpClient
 
 import "strconv"
 

@@ -1,7 +1,8 @@
 package command
 
 import (
-	"simple-go/command/MaraiHttpClient"
+	CqGoClient "simple-go/command/CQGoClient"
+	"simple-go/command/MiraiHttpClient"
 	"simple-go/command/Template"
 	"simple-go/command/console"
 	"simple-go/command/cq"
@@ -15,8 +16,9 @@ func init() {
 	p(study.GetAllConsoles())
 	p(cq.GetAllConsoles())
 	p(other.GetAllConsoles())
-	p(MaraiHttpClient.GetAllConsoles())
+	p(MiraiHttpClient.GetAllConsoles())
 	p(tmp.GetAllConsoles())
+	p(CqGoClient.GetAllConsoles())
 
 }
 
