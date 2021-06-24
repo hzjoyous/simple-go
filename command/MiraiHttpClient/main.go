@@ -40,6 +40,8 @@ func managerRun() MiraiHttpClient {
 
 	client = newMiraiClient(authKey, adminQQNumber, "http://127.0.0.1:8080")
 
+
+
 	result, _ := client.getAbout()
 
 	fmt.Println(result.String())
@@ -56,7 +58,16 @@ func mainAction() {
 
 	timestamp := time.Now().Unix()
 	tm := time.Unix(timestamp, 0)
+
 	fmt.Println(tm.Format("2006-01-02 03:04:05 PM"))
+
+	hiClient := newHiTokotoClient("")
+	resp, _ := hiClient.getOneTokoto()
+	var hitResp HiTokotoResponse
+	_ = json.Unmarshal(resp.Body(), &hitResp)
+
+	msg := hitResp.Hitokoto + "----" + hitResp.From
+	_, _ = client.sendGroupMessage("694675063", msg)
 
 	go jobRun(client)
 

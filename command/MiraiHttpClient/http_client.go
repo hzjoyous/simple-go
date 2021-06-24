@@ -26,14 +26,6 @@ func newMiraiClient(authKey string, adminQQNumber string, host string) MiraiHttp
 	return MiraiHttpClient
 }
 
-func (receiver *MiraiHttpClient) checkSessionByCode(code int) error {
-	var err error
-	if code == 3 || code == 4 {
-		return receiver.verifySession()
-	}
-	return err
-}
-
 func (receiver *MiraiHttpClient) verifySession() error {
 	var err error
 	err = nil
@@ -86,7 +78,7 @@ type authResponse struct {
 
 /**
  * 获取session
-*/
+ */
 func (receiver MiraiHttpClient) auth(authKey string) (resp *resty.Response, err error) {
 	return receiver.httpClient.R().SetBody(map[string]string{
 		"authKey": authKey,
@@ -134,15 +126,6 @@ type sendFriendMessageResponse struct {
 	MessageID int    `json:"messageId"`
 }
 
-func getTextMessage(message string) map[string]interface{} {
-	return map[string]interface{}{"type": "Plain", "text": message}
-}
-
-// ** 1~289
-func getFaceMessage(message string) map[string]interface{} {
-	return map[string]interface{}{"type": "Face", "faceId": message}
-}
-
 // 发送消息给friend
 func (receiver MiraiHttpClient) sendFriendMessage(qq string, messageChainList ...map[string]interface{}) (resp *resty.Response, err error) {
 	fmt.Println(receiver.sessionKey)
@@ -153,11 +136,29 @@ func (receiver MiraiHttpClient) sendFriendMessage(qq string, messageChainList ..
 	}).Post("/sendFriendMessage")
 }
 
-// todo 临时会话
-func (receiver MiraiHttpClient) sendTempMessage() (resp *resty.Response, err error) {
-	return receiver.httpClient.R().SetQueryParams(map[string]string{
+type sendTempMessageRequest struct {
+	SessionKey   string `json:"sessionKey"`
+	Qq           int    `json:"qq"`
+	Group        int    `json:"group"`
+	MessageChain []struct {
+		Type string `json:"type"`
+		Text string `json:"text"`
+	} `json:"messageChain"`
+}
 
-	}).Post("")
+// @Unverified
+func (receiver MiraiHttpClient) sendTempMessage(qq int, group int, messageType string, text string) (resp *resty.Response, err error) {
+	return receiver.httpClient.R().SetBody(sendTempMessageRequest{
+		SessionKey: receiver.sessionKey,
+		Qq:         qq,
+		Group:      group,
+		MessageChain: []struct {
+			Type string `json:"type"`
+			Text string `json:"text"`
+		}{
+			{Type: messageType, Text: text},
+		},
+	}).Post("/sendTempMessage")
 }
 
 type sendGroupMessageRequest struct {
@@ -209,3 +210,23 @@ func (receiver MiraiHttpClient) friendList() (resp *resty.Response, err error) {
 		"sessionKey": receiver.sessionKey,
 	}).Get("/friendList")
 }
+
+
+
+
+func getTextMessage(message string) map[string]interface{} {
+	return map[string]interface{}{"type": "Plain", "text": message}
+}
+
+// ** 1~289
+func getFaceMessage(message string) map[string]interface{} {
+	return map[string]interface{}{"type": "Face", "faceId": message}
+}
+
+type CommonMessageResponse struct {
+	Code      int    `json:"code"`
+	Msg       string `json:"msg"`
+	MessageID int    `json:"messageId"`
+}
+
+

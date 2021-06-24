@@ -2,9 +2,9 @@ package tmp
 
 import (
 	"fmt"
+	"github.com/robfig/cron/v3"
 	"simple-go/command/console"
 	"time"
-	"github.com/robfig/cron/v3"
 )
 
 var commandList = make(map[string]console.Console)
@@ -25,10 +25,13 @@ func mainAction() {
 	now := time.Now()
 	fmt.Println(a.Unix())
 	fmt.Println(now.Unix())
-	time.Sleep(time.Second * 3)
+	//time.Sleep(time.Second * 3)
 	fmt.Println(now.Unix())
 	fmt.Println(now.After(a))
 	fmt.Println(a.Format("2006/01/02 15:04:05"))
+	fmt.Println(now.Format("2006/01/02 15:04:05"))
+	//time.Sleep(time.Second * 3)
+	fmt.Println(now.Hour())
 	fmt.Println(now.Format("2006/01/02 15:04:05"))
 	fmt.Println("时间未到")
 	c := cron.New()
