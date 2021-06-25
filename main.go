@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/joho/godotenv"
 	"log"
 	"os"
-	"simple-go/command"
-	"github.com/joho/godotenv"
+	"dog/command"
 )
 
 func main() {

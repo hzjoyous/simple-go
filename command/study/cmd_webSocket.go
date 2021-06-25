@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"simple-go/command/console"
+	"dog/command/console"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"

@@ -1,4 +1,4 @@
-module simple-go
+module dog
 
 go 1.14
 

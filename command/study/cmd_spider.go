@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"simple-go/command/console"
+	"dog/command/console"
 )
 
 

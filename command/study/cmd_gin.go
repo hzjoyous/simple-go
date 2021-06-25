@@ -3,7 +3,7 @@ package study
 import (
 	"fmt"
 	"net/http"
-	"simple-go/command/console"
+	"dog/command/console"
 
 	"github.com/gin-gonic/gin"
 )

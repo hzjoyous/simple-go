@@ -3,7 +3,7 @@ package command
 import (
 	"fmt"
 	"net/http"
-	"simple-go/command/console"
+	"dog/command/console"
 	"sort"
 	"strings"
 	"time"

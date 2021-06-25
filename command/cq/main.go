@@ -1,7 +1,7 @@
 package cq
 
 
-import "simple-go/command/console"
+import "dog/command/console"
 
 var commandList = make(map[string]console.Console)
 

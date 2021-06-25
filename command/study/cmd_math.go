@@ -3,8 +3,8 @@ package study
 import (
 	"fmt"
 	"math/big"
-	"simple-go/command/console"
-	"simple-go/command/util"
+	"dog/command/console"
+	"dog/command/util"
 	"sort"
 )
 

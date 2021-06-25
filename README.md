@@ -1,4 +1,4 @@
-# simple-go
+# dog
 
 # test
 
@@ -18,5 +18,5 @@ go  test -benchmem  ./... -bench .
 # 运行 ./command 目录下的所有基准测试
 go  test -benchmem  ./command -bench . 
 # 运行 simle-go/command 中的所有基准测试
-go  test -benchmem  simple-go/command  command -bench . 
+go  test -benchmem  dog/command  command -bench . 
 ```

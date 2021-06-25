@@ -3,7 +3,7 @@ package study
 import (
 	"fmt"
 	"math/rand"
-	"simple-go/command/console"
+	"dog/command/console"
 	"strconv"
 	"strings"
 )

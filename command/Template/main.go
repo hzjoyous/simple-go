@@ -2,7 +2,7 @@ package Template
 
 import (
 	"fmt"
-	"simple-go/command/console"
+	"dog/command/console"
 )
 
 var commandList = make(map[string]console.Console)

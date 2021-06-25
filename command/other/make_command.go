@@ -3,7 +3,7 @@ package other
 import (
 	"fmt"
 	"os"
-	"simple-go/command/console"
+	"dog/command/console"
 	"strings"
 )
 

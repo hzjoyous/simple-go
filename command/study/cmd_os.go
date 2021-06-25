@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"runtime"
-	"simple-go/command/console"
+	"dog/command/console"
 )
 
 func init() {

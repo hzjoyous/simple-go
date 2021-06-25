@@ -3,7 +3,7 @@ package CqGoClient
 import (
 	"encoding/json"
 	"fmt"
-	"simple-go/command/console"
+	"dog/command/console"
 	"time"
 )
 

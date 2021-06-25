@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"regexp"
-	"simple-go/command/console"
+	"dog/command/console"
 )
 
 func init() {

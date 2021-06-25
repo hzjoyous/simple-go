@@ -1,14 +1,14 @@
 package command
 
 import (
-	CqGoClient "simple-go/command/CQGoClient"
-	"simple-go/command/MiraiHttpClient"
-	"simple-go/command/Template"
-	"simple-go/command/console"
-	"simple-go/command/cq"
-	"simple-go/command/other"
-	"simple-go/command/study"
-	"simple-go/command/tmp"
+	CqGoClient "dog/command/CQGoClient"
+	"dog/command/MiraiHttpClient"
+	"dog/command/Template"
+	"dog/command/console"
+	"dog/command/cq"
+	"dog/command/other"
+	"dog/command/study"
+	"dog/command/tmp"
 )
 
 func init() {

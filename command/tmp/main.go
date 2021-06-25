@@ -3,7 +3,7 @@ package tmp
 import (
 	"fmt"
 	"github.com/robfig/cron/v3"
-	"simple-go/command/console"
+	"dog/command/console"
 	"time"
 )
 

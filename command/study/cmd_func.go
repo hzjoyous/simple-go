@@ -2,8 +2,8 @@ package study
 
 import (
 	"fmt"
-	"simple-go/command/util"
-	"simple-go/command/console"
+	"dog/command/util"
+	"dog/command/console"
 )
 
 func init() {

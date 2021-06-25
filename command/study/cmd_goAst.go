@@ -5,7 +5,7 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
-	"simple-go/command/console"
+	"dog/command/console"
 )
 
 

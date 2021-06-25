@@ -3,7 +3,7 @@ package study
 import (
 	"flag"
 	"fmt"
-	"simple-go/command/console"
+	"dog/command/console"
 )
 
 func init() {

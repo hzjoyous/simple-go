@@ -1,7 +1,7 @@
 package study
 
 import (
-	"simple-go/command/console"
+	"dog/command/console"
 )
 
 
