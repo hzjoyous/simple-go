@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math/big"
 	"dog/command/console"
-	"dog/command/util"
+	"dog/util"
 	"sort"
 )
 

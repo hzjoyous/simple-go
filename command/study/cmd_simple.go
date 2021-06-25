@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"dog/command/console"
-	"dog/command/util"
+	"dog/util"
 )
 
 func init() {

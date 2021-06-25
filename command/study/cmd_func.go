@@ -1,9 +1,9 @@
 package study
 
 import (
-	"fmt"
-	"dog/command/util"
 	"dog/command/console"
+	"dog/util"
+	"fmt"
 )
 
 func init() {

@@ -1,11 +1,11 @@
 package main
 
 import (
+	"dog/command"
 	"fmt"
-	"github.com/joho/godotenv"
+	"github.com/spf13/viper"
 	"log"
 	"os"
-	"dog/command"
 )
 
 func main() {
@@ -14,7 +14,9 @@ func main() {
 			fmt.Println("recover ",err)
 		}
 	}()
-	err := godotenv.Load()
+	viper.SetConfigType("env")
+
+	err := viper.SafeWriteConfigAs("conf/.env")
 	if err != nil {
 		log.Fatal(err)
 	}

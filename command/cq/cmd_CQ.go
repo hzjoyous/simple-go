@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"net/http"
 	"dog/command/console"
-	"dog/command/util"
+	"dog/util"
 	"strconv"
 	"strings"
 	"time"
