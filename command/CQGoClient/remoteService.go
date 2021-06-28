@@ -1,6 +1,7 @@
 package CqGoClient
 
 import (
+	"dog/util"
 	"github.com/go-resty/resty/v2"
 )
 
@@ -39,7 +40,7 @@ func (s remoteService) getGroupList() (resp *resty.Response, err error) {
 
 func (s remoteService) sendGroupMsg(group_id int64,message string) (resp *resty.Response, err error) {
 	return s.httpClient.R().SetBody(map[string]interface{}{
-		"group_id": ToString(group_id),
+		"group_id": util.ToString(group_id),
 		"message":  message,
 	}).Get("/send_group_msg")
 }
