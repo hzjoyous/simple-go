@@ -2,6 +2,7 @@ package main
 
 import (
 	"dog/command"
+	"dog/util"
 	"fmt"
 	"github.com/spf13/viper"
 	"log"
@@ -28,9 +29,11 @@ func main() {
 			// other error
 		}
 	}
-	err := viper.SafeWriteConfigAs("conf/.env")
-	if err != nil {
-		log.Fatal(err)
+	if !util.IsExist("conf/.env") {
+		err := viper.SafeWriteConfigAs("conf/.env")
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	fmt.Println("name: ", os.Getenv("name"))

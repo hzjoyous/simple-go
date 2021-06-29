@@ -1,9 +1,10 @@
 package tmp
 
 import (
+	"dog/command/console"
 	"fmt"
 	"github.com/robfig/cron/v3"
-	"dog/command/console"
+	"math/rand"
 	"time"
 )
 
@@ -25,17 +26,41 @@ func mainAction() {
 	now := time.Now()
 	fmt.Println(a.Unix())
 	fmt.Println(now.Unix())
-	//time.Sleep(time.Second * 3)
+	//t.Sleep(t.Second * 3)
 	fmt.Println(now.Unix())
 	fmt.Println(now.After(a))
 	fmt.Println(a.Format("2006/01/02 15:04:05"))
 	fmt.Println(now.Format("2006/01/02 15:04:05"))
-	//time.Sleep(time.Second * 3)
+	//t.Sleep(t.Second * 3)
 	fmt.Println(now.Hour())
 	fmt.Println(now.Format("2006/01/02 15:04:05"))
 	fmt.Println("时间未到")
 	c := cron.New()
 	_, _ = c.AddFunc("30 * * * *", func() { fmt.Println("Every hour on the half hour") })
 	c.Start()
+
+	rand.Seed(time.Now().Unix())
+	num := 0
+	counter := 0
+	t := 0
+	for {
+		counter = 0
+		t += 1
+		num = 0
+		for {
+			if rand.Intn(2) == 0 {
+				num += 1
+				//fmt.Println("+1", num)
+			} else {
+				num -= 1
+				//fmt.Println("-1", num)
+			}
+			counter += 1
+			if num == 8 {
+				fmt.Println("第", t, "次数:", counter)
+				break
+			}
+		}
+	}
 
 }
