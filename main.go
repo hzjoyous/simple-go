@@ -4,12 +4,17 @@ import (
 	"dog/command"
 	"dog/util"
 	"fmt"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"log"
 	"os"
 )
 
 func main() {
+	//log.SetFormatter(&log.JSONFormatter{})
+	log.SetFormatter(&log.TextFormatter{
+		FullTimestamp: true,
+	})
+
 	defer func() {
 		if err := recover(); err != nil {
 			fmt.Println("recover ", err)
@@ -20,7 +25,6 @@ func main() {
 	if _, err := os.Stat(confDir); err != nil {
 		if os.IsNotExist(err) {
 			// file does not exist
-
 			if err := os.MkdirAll(confDir, 0755); err != nil {
 				return
 			}
@@ -35,9 +39,10 @@ func main() {
 			log.Fatal(err)
 		}
 	}
-
-	fmt.Println("name: ", os.Getenv("name"))
-	fmt.Println("age: ", os.Getenv("age"))
+	log.WithFields(log.Fields{
+		"animal": "walrus",
+		"size":   10,
+	}).Info("A group of walrus emerges from the ocean")
 
 	command.Run(os.Args)
 }
