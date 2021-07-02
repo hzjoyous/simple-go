@@ -1,12 +1,12 @@
 package cq
 
 import (
+	"dog/command/console"
+	"dog/util"
 	"encoding/json"
 	"fmt"
 	"math/rand"
 	"net/http"
-	"dog/command/console"
-	"dog/util"
 	"strconv"
 	"strings"
 	"time"
